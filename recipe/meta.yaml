@@ -7,23 +7,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/unicorn-binance-trailing-stop-loss-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/unicorn-binance-trailing-stop-loss-{{ version }}.tar.gz
   sha256: 643f890b8cee206b49172c697ea563c181f887d82a9e4d20375a494931b4493a
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
     - requests
     - unicorn-binance-rest-api
     - unicorn-binance-websocket-api
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - requests
     - ubtsl
     - unicorn-binance-rest-api
@@ -36,6 +36,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://www.lucit.tech/unicorn-binance-trailing-stop-loss.html
